@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone', // Para Docker deployment
   eslint: {
     ignoreDuringBuilds: true,
   },
