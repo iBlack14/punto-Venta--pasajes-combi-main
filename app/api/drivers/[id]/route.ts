@@ -61,7 +61,7 @@ export async function PUT(
         phone: body.phone,
         license: body.license,
         experience_years: body.experience_years,
-        status: body.status || "active", // Mantener status o usar active por defecto
+        status: body.status === "active" ? "activo" : body.status === "inactive" ? "inactivo" : (body.status || "activo"), // Mantener status o usar activo por defecto
         updated_at: new Date().toISOString(),
       })
       .eq("id", id)

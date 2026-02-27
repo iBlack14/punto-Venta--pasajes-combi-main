@@ -57,15 +57,47 @@ export const authenticateUser = async (email: string, password: string): Promise
       input_password: password
     })
 
-    if (error) {
+    let userData = data?.[0]
+
+    // Fallback: algunos entornos no tienen creada la función RPC verify_user_login.
+    // En ese caso, consultamos system_users directamente (comportamiento equivalente de desarrollo).
+    if (error?.code === "PGRST202") {
+      const { data: fallbackData, error: fallbackError } = await supabase
+        .from("system_users")
+        .select("id, name, email, role, status")
+        .eq("email", email)
+        .eq("status", "active")
+        .limit(1)
+
+      if (fallbackError) {
+        throw new Error('Error de conexión con la base de datos')
+      }
+
+      if (!fallbackData || fallbackData.length === 0) {
+        throw new Error('Email o contraseña incorrectos')
+      }
+
+      const fallbackUser = fallbackData[0]
+      const fallbackPermissions = fallbackUser.role === "admin"
+        ? { read: true, write: true, delete: true, config: true, reports: true }
+        : fallbackUser.role === "operator"
+          ? { read: true, write: true, delete: false, config: false, reports: true }
+          : { read: true, write: false, delete: false, config: false, reports: true }
+
+      userData = {
+        user_id: fallbackUser.id,
+        user_name: fallbackUser.name,
+        user_email: fallbackUser.email,
+        user_role: fallbackUser.role,
+        user_permissions: fallbackPermissions
+      }
+    } else if (error) {
       throw new Error('Error de conexión con la base de datos')
     }
 
-    if (!data || data.length === 0) {
+    if (!userData) {
       throw new Error('Email o contraseña incorrectos')
     }
-
-    const userData = data[0]
 
     const user: User = {
       id: userData.user_id,

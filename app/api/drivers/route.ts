@@ -58,7 +58,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
           phone: body.phone,
           license: body.license,
           email: body.email || null,
-          status: "active",
+          status: body.status === "active" ? "activo" : body.status === "inactive" ? "inactivo" : (body.status || "activo"),
         },
       ])
       .select()

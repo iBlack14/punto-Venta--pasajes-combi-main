@@ -111,7 +111,7 @@ export default function Home() {
   const [isConfigOpen, setIsConfigOpen] = useState(false)
   const [companyLogo, setCompanyLogo] = useState("/placeholder_logo.svg")
   const [userPhoto, setUserPhoto] = useState("/placeholder-user.jpg")
-  
+
   const [searchTerm, setSearchTerm] = useState("")
 
   // Estados para búsqueda de DNI
@@ -225,38 +225,7 @@ export default function Home() {
     loadRoutes()
   }, [])
 
-  // Verificación de conexión a Supabase leyendo company_info
-  useEffect(() => {
-    const checkSupabase = async () => {
-      try {
-        const res = await fetch("/api/company")
-        let payload: any = null
-        try {
-          payload = await res.json()
-        } catch {}
-        if (res.ok) {
-          toast({
-            title: "Conectado a Supabase",
-            description: payload?.name ? `Lectura OK: ${payload.name}` : "Lectura exitosa de company_info.",
-          })
-        } else {
-          const message = (payload && payload.error) ? payload.error : `HTTP ${res.status}`
-          toast({
-            title: "Error de conexión a Supabase",
-            description: message,
-            variant: "destructive",
-          })
-        }
-      } catch (err) {
-        toast({
-          title: "Error de conexión a Supabase",
-          description: err instanceof Error ? err.message : "Error desconocido",
-          variant: "destructive",
-        })
-      }
-    }
-    checkSupabase()
-  }, [])
+
 
   // Cargar ventas al inicializar el componente
   useEffect(() => {
@@ -851,7 +820,7 @@ export default function Home() {
       license: apiDriver.license,
       phone: apiDriver.phone,
       email: apiDriver.email || "",
-      isActive: apiDriver.status === "active" || apiDriver.status == null || apiDriver.status === "",
+      isActive: apiDriver.status === "activo" || apiDriver.status === "active" || apiDriver.status == null || apiDriver.status === "",
     }))
   }
 
@@ -980,38 +949,7 @@ export default function Home() {
 
                         {/* Campo de DNI con búsqueda integrada */}
                         <div className="space-y-2">
-                          <div className="flex items-center justify-between">
-                            <Label>DNI del Pasajero *</Label>
-                            <div className="flex space-x-2">
-                              <Button
-                                type="button"
-                                variant={isAutoSearch ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setIsAutoSearch(true)}
-                                className="text-xs"
-                              >
-                                🔍 Automático
-                              </Button>
-                              <Button
-                                type="button"
-                                variant={!isAutoSearch ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setIsAutoSearch(false)}
-                                className="text-xs"
-                              >
-                                ✏️ Manual
-                              </Button>
-                            </div>
-                          </div>
-                          {isAutoSearch ? (
-                            <p className="text-xs text-blue-600 dark:text-blue-400">
-                              🔍 Búsqueda automática habilitada: Se buscará primero en la base de datos local y luego en la API externa
-                            </p>
-                          ) : (
-                            <p className="text-xs text-gray-600 dark:text-gray-400">
-                              ✏️ Modo manual: Solo se buscará en la base de datos local. Complete los datos manualmente
-                            </p>
-                          )}
+                          <Label>DNI del Pasajero *</Label>
                           <div className="relative">
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                             <Input
@@ -1379,7 +1317,7 @@ export default function Home() {
                             </SelectTrigger>
                             <SelectContent>
                               {uiDrivers
-                  .filter((driver) => driver.isActive)
+                                .filter((driver) => driver.isActive)
                                 .map((driver) => (
                                   <SelectItem key={driver.id} value={driver.id}>
                                     <div className="flex items-center justify-between w-full">
@@ -1472,7 +1410,7 @@ export default function Home() {
                       <CardTitle>Información de la Empresa</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <div className="flex flex-col items-center space-y-4" style={{marginBottom: "2px"}}>
+                      <div className="flex flex-col items-center space-y-4" style={{ marginBottom: "2px" }}>
                         <div className="flex flex-row">
                           <img
                             src={companyLogo || "/placeholder_logo.svg"}
@@ -1569,7 +1507,7 @@ export default function Home() {
                             </Button>
                           </div>
                         </div>
-                        <p className="text-sm text-muted-foreground" style={{margin: "41px 0 0 1px"}}>Foto de perfil</p>
+                        <p className="text-sm text-muted-foreground" style={{ margin: "41px 0 0 1px" }}>Foto de perfil</p>
                       </div>
 
                       <div>
