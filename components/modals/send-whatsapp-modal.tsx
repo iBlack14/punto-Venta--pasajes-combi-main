@@ -125,7 +125,7 @@ export function SendWhatsAppModal({ isOpen, onClose, sale }: SendWhatsAppModalPr
                 </div>
                 <div className="flex items-center space-x-2">
                   <Armchair className="h-4 w-4 text-purple-600" />
-                  <span>Asiento {sale.seatNumber.toString().padStart(2, "0")}</span>
+                  <span>Asiento {sale.seatNumber?.toString().padStart(2, "0") || "00"}</span>
                 </div>
               </div>
             </div>

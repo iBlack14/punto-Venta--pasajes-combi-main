@@ -12,7 +12,7 @@ import type { Driver, CreateDriver, ApiResponse } from "@/lib/types/database"
 // GET: Obtener todos los conductores
 export async function GET(): Promise<NextResponse<ApiResponse<Driver[]>>> {
   try {
-    const supabase = createClient()
+    const supabase = createClient() as any
 
     // Consultar todos los conductores ordenados por nombre
     const { data: drivers, error } = await supabase.from("drivers").select("*").order("name", { ascending: true })
@@ -32,7 +32,7 @@ export async function GET(): Promise<NextResponse<ApiResponse<Driver[]>>> {
 // POST: Crear un nuevo conductor
 export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse<Driver>>> {
   try {
-    const supabase = createClient()
+    const supabase = createClient() as any
 
     // Obtener datos del cuerpo de la petición
     const body: CreateDriver = await request.json()

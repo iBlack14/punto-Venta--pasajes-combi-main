@@ -41,7 +41,7 @@ export function PackageForm({ routes, drivers, onSubmit, onCancel }: PackageForm
   const [description, setDescription] = useState("")
   const [total, setTotal] = useState("")
 
-  const selectedRoute = routes.find((r) => r.id.toString() === selectedRouteId)
+  const selectedRoute = routes.find((r) => r.id?.toString() === selectedRouteId)
 
   const fetchNamePhoneByDni = async (dni: string): Promise<{ name?: string; phone?: string } | null> => {
     try {
@@ -320,7 +320,7 @@ export function PackageForm({ routes, drivers, onSubmit, onCancel }: PackageForm
                 </SelectTrigger>
                 <SelectContent>
                   {routes.map((route) => (
-                    <SelectItem key={route.id} value={route.id.toString()}>
+                    <SelectItem key={route.id} value={route.id?.toString() || `${route.id}`}>
                       {route.from} → {route.to}
                     </SelectItem>
                   ))}

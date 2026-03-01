@@ -105,7 +105,7 @@ export function SalesSuccessModal({ isOpen, onClose, sale, onPrintTicket, onSend
                   {sale.route.from} → {sale.route.to}
                 </p>
                 <p className="text-gray-500 dark:text-gray-400">
-                  Asiento {sale.seatNumber.toString().padStart(2, "0")}
+                  Asiento {sale.seatNumber?.toString().padStart(2, "0") || "00"}
                 </p>
               </div>
             </div>

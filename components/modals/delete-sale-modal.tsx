@@ -92,7 +92,7 @@ export function DeleteSaleModal({ isOpen, onClose, onConfirm, sale }: DeleteSale
               <div className="flex items-center justify-between pt-2 border-t border-gray-200">
                 <div className="flex items-center gap-2">
                   <UserCheck className="w-4 h-4 text-gray-500" />
-                  <span className="text-xs text-gray-600">Asiento {sale.seatNumber.toString().padStart(2, "0")}</span>
+                  <span className="text-xs text-gray-600">Asiento {sale.seatNumber?.toString().padStart(2, "0") || "00"}</span>
                 </div>
                 <div className="text-right">
                   <p className="font-bold text-lg text-gray-800">S/ {sale.total.toFixed(2)}</p>

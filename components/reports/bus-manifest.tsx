@@ -64,7 +64,7 @@ export function BusManifest({ sales, driverName, route, date, schedule, printMod
                 </>
               ) : (
                 <div style={{ fontSize: "24px", fontWeight: "700" }}>
-                  {seat.toString().padStart(2, '0')}
+                  {seat?.toString().padStart(2, '0') || '00'}
                 </div>
               )}
             </div>
@@ -84,13 +84,13 @@ export function BusManifest({ sales, driverName, route, date, schedule, printMod
     >
       {/* Header */}
       <div className="text-center mb-6">
-        <h1 
+        <h1
           className="font-bold text-black"
           style={{ fontSize: "16px", marginBottom: "16px" }}
         >
           MANIFIESTO
         </h1>
-        
+
         {/* Driver and Route Info */}
         <div className="space-y-2 text-left">
           <div className="flex">
@@ -153,7 +153,7 @@ export function BusManifest({ sales, driverName, route, date, schedule, printMod
               />
             </div>
           </div>
-          
+
           {/* Two passenger seats */}
           <PassengerCard seat={2} />
           <PassengerCard seat={3} />
@@ -190,7 +190,7 @@ export function BusManifest({ sales, driverName, route, date, schedule, printMod
       </div>
 
       {/* PUERTA TRASERA Label */}
-      <div 
+      <div
         className="flex items-center justify-center mt-8"
         style={{ color: "#75857A", fontSize: "18px", fontWeight: "700" }}
       >

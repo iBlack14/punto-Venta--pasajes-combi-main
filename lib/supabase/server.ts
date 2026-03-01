@@ -19,7 +19,7 @@ export function createClient() {
         getUser: () => Promise.resolve({ data: { user: null }, error: null }),
         getSession: () => Promise.resolve({ data: { session: null }, error: null }),
       },
-    }
+    } as any
   }
 
   return createServerClient(

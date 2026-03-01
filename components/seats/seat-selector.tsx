@@ -62,9 +62,9 @@ export function SeatSelector({
       content = <span className="text-xs font-bold">{initials}</span>
     } else if (isSelected) {
       bgColor = "bg-blue-500 dark:bg-blue-600"
-      content = <span className="text-xs font-bold">{seatNumber.toString().padStart(2, "0")}</span>
+      content = <span className="text-xs font-bold">{seatNumber?.toString().padStart(2, "0") || "00"}</span>
     } else {
-      content = <span className="text-xs font-bold">{seatNumber.toString().padStart(2, "0")}</span>
+      content = <span className="text-xs font-bold">{seatNumber?.toString().padStart(2, "0") || "00"}</span>
     }
 
     return (
@@ -81,7 +81,7 @@ export function SeatSelector({
             ? "Asiento del conductor"
             : isOccupied
               ? `Ocupado por: ${occupiedSeats[seatNumber]?.passenger.name} (DNI: ${occupiedSeats[seatNumber]?.passenger.dni})`
-              : `Asiento ${seatNumber.toString().padStart(2, "0")}`
+              : `Asiento ${seatNumber?.toString().padStart(2, "0") || "00"}`
         }
       >
         {content}
@@ -218,7 +218,7 @@ export function SeatSelector({
       {selectedSeat && (
         <div className="bg-blue-50 dark:bg-blue-950 p-3 rounded-lg text-center">
           <p className="text-sm text-blue-800 dark:text-blue-200">
-            Asiento seleccionado: <strong>{selectedSeat.toString().padStart(2, "0")}</strong>
+            Asiento seleccionado: <strong>{selectedSeat?.toString().padStart(2, "0") || "00"}</strong>
           </p>
         </div>
       )}

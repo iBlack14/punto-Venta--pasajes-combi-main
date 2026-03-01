@@ -39,7 +39,7 @@ export function PassengerByDriverReport({ sales, routes, drivers }: PassengerByD
     return sales.filter((sale) => {
       if (selectedDriver && selectedDriver !== "all" && sale.driver.id !== selectedDriver) return false
       if (selectedDate && sale.date !== selectedDate) return false
-      if (selectedRoute && selectedRoute !== "all" && sale.route.id.toString() !== selectedRoute) return false
+      if (selectedRoute && selectedRoute !== "all" && sale.route?.id?.toString() !== selectedRoute) return false
       if (selectedSchedule && selectedSchedule !== "all" && sale.schedule !== selectedSchedule) return false
       return true
     })
@@ -186,7 +186,7 @@ export function PassengerByDriverReport({ sales, routes, drivers }: PassengerByD
                 <SelectContent>
                   <SelectItem value="all">Todas las rutas</SelectItem>
                   {routes.map((route) => (
-                    <SelectItem key={route.id} value={route.id.toString()}>
+                    <SelectItem key={route.id} value={route.id?.toString() || `${route.id}`}>
                       {route.from} → {route.to}
                     </SelectItem>
                   ))}

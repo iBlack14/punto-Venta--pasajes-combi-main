@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
-import type { Sale, ApiResponse } from "@/lib/types/database"
+import type { ApiResponse } from "@/lib/types/database"
+import type { Sale } from "@/lib/types"
 
 /**
  * API Route para operaciones específicas de una venta

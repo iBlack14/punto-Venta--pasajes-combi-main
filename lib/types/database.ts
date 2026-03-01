@@ -16,9 +16,10 @@ export interface Route {
   origin: string
   destination: string
   price: number
-  departure_time: string
-  arrival_time: string
-  distance_km: number
+  departure_time?: string
+  arrival_time?: string
+  distance_km?: number
+  schedule?: string
   status: string
   created_at: string
   updated_at: string
@@ -95,3 +96,9 @@ export type CreateDriver = Omit<Driver, "id" | "created_at" | "updated_at">
 export type CreateRoute = Omit<Route, "id" | "created_at" | "updated_at">
 export type CreateSale = Omit<Sale, "id" | "created_at" | "updated_at">
 export type CreatePackage = Omit<Package, "id" | "created_at" | "updated_at" | "tracking_code">
+
+export interface SiteSetting {
+  id: string
+  blocks: any
+  updated_at: string
+}

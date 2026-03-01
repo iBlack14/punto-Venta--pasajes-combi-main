@@ -43,7 +43,7 @@ export function WhatsAppWidget() {
   }, [isOpen, messages.length])
 
   // Respuestas automáticas deshabilitadas: soporte solo mensajería
-  const getBotResponse = (_userMessage: string): string => {
+  const getBotResponse = (userMessage: string): string => {
     const message = userMessage.toLowerCase()
 
     if (message.includes("hola") || message.includes("buenos") || message.includes("buenas")) {
@@ -192,12 +192,7 @@ export function WhatsAppWidget() {
         >
           <img src="/whatsapp-logo.svg" alt="WhatsApp" className="h-6 w-6" />
 
-          {/* Notification badge */}
-          {!isOpen && (
-            <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 bg-red-500 text-white text-xs flex items-center justify-center">
-              1
-            </Badge>
-          )}
+          {/* Notification badge removed as requested */}
 
           {/* Pulse animation */}
           <div className="absolute inset-0 rounded-full bg-green-500/70 animate-ping opacity-20"></div>
@@ -206,7 +201,7 @@ export function WhatsAppWidget() {
         {/* Tooltip */}
         {!isOpen && (
           <div className="absolute bottom-16 right-0 bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-Soporte técnico: WhatsApp o email
+            Soporte técnico: WhatsApp o email
             <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
           </div>
         )}

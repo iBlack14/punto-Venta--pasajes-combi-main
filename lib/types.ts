@@ -34,6 +34,7 @@ export interface Route {
   price: number
   schedule: string
   departure_time?: string // Para compatibilidad con database.ts
+  arrival_time?: string
 }
 
 export interface CompanyConfig {
@@ -89,4 +90,43 @@ export interface Package {
   driver: Driver
   deliveryDate?: string
   notes?: string
+}
+
+// ==========================================
+// CMS Builder Types
+// ==========================================
+
+export type BlockType = "hero" | "features" | "routes_grid" | "text"
+
+export interface BaseBlock {
+  id: string
+  type: BlockType
+}
+
+export interface HeroBlock extends BaseBlock {
+  type: "hero"
+  title: string
+  subtitle: string
+  image: string
+}
+
+export interface FeaturesBlock extends BaseBlock {
+  type: "features"
+}
+
+export interface RoutesGridBlock extends BaseBlock {
+  type: "routes_grid"
+}
+
+export interface TextBlock extends BaseBlock {
+  type: "text"
+  content: string
+}
+
+export type SiteBlock = HeroBlock | FeaturesBlock | RoutesGridBlock | TextBlock
+
+export interface SiteSettings {
+  id: string
+  blocks: SiteBlock[]
+  updated_at: string
 }

@@ -16,7 +16,7 @@ export async function GET(
   { params }: { params: { id: string } },
 ): Promise<NextResponse<ApiResponse<Driver>>> {
   try {
-    const supabase = createClient()
+    const supabase = createClient() as any
     const { id } = params
 
     const { data: driver, error } = await supabase.from("drivers").select("*").eq("id", id).single()
@@ -42,7 +42,7 @@ export async function PUT(
   { params }: { params: { id: string } },
 ): Promise<NextResponse<ApiResponse<Driver>>> {
   try {
-    const supabase = createClient()
+    const supabase = createClient() as any
     const { id } = params
     const body = await request.json()
 
@@ -89,7 +89,7 @@ export async function DELETE(
   { params }: { params: { id: string } },
 ): Promise<NextResponse<ApiResponse<null>>> {
   try {
-    const supabase = createClient()
+    const supabase = createClient() as any
     const { id } = params
 
     // Verificar si el conductor tiene ventas asociadas
